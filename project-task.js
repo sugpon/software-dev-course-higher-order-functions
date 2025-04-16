@@ -43,7 +43,15 @@ Step-by-Step:
 2. Use the `filter()` method to apply the callback to the array.
 3. Return the filtered result.
 */
+const filterProducts = products.filter(item => item.inStock);
+//console.log(filterProducts);
 
+/* Output: 
+[
+  { name: 'Laptop', price: 1000, inStock: true },
+  { name: 'Tablet', price: 800, inStock: true },
+  { name: 'Monitor', price: 300, inStock: true }
+]*/
 
 /*
 🔹 Task 2: Transform Product Names
@@ -55,6 +63,20 @@ Step-by-Step:
 2. Extract and transform the `name` property to uppercase.
 3. Store the result in a new variable.
 */
+
+const upperCaseProducts = products.map(item => (
+  {
+    ...item, name: item.name.toUpperCase()
+  }));
+//console.log(upperCaseProducts);
+/* Output:
+[
+  { name: 'LAPTOP', price: 1000, inStock: true },
+  { name: 'PHONE', price: 500, inStock: false },
+  { name: 'TABLET', price: 800, inStock: true },
+  { name: 'MONITOR', price: 300, inStock: true },
+  { name: 'KEYBOARD', price: 100, inStock: false }
+]*/
 
 
 /*
@@ -70,6 +92,12 @@ Step-by-Step:
 3. Use this returned function inside a `map()` call to apply discounts to all products.
 */
 
+const applyDiscount= discountPercent => products.map( item => ({
+     ...item, 
+     price: item.price * 1 - (discountPercent/ 100)
+      }));
+//console.log(applyDiscount(10));
+
 
 /*
 🔹 Task 4: Calculate Total Inventory Value
@@ -82,6 +110,8 @@ Step-by-Step:
 3. Store the total in a new variable.
 */
 
+let totalInventory= products.reduce((totalValue, num) => totalValue + num.price, 0);
+//console.log(`Total Inventory Cost: ${totalInventory}`);
 
 // ============================================
 // 🧪 Console Test Your Work
@@ -91,3 +121,9 @@ Step-by-Step:
 // console.log("Uppercased names:", ...);
 // console.log("Discounted products:", ...);
 // console.log("Total value in stock:", ...);
+
+console.log("Filtered products:", filterProducts);
+console.log("Uppercased names:", upperCaseProducts);
+console.log("Discounted products:", applyDiscount(10));
+console.log("Total value in stock:", totalInventory);
+
